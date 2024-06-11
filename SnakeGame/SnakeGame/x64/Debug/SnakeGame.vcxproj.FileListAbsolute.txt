@@ -1,0 +1,3 @@
+C:\Users\tmsth\Documents\C + +\SnakeGame\SnakeGame\x64\Debug\SnakeGame.vcxproj.AssemblyReference.cache
+C:\Users\tmsth\Documents\C + +\SnakeGame\SnakeGame\x64\Debug\SnakeGame.Game.resources
+C:\Users\tmsth\Documents\C + +\SnakeGame\SnakeGame\x64\Debug\SnakeGame.vcxproj.GenerateResource.cache

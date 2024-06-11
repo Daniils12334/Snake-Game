@@ -1,0 +1,11 @@
+﻿  Game.cpp
+C:\Users\tmsth\Documents\C + +\SnakeGame\SnakeGame\Game.h(40,16): warning C4490: 'override': incorrect use of override specifier; 'SnakeGame::Game::OnPaint' does not match a base ref class method
+  (compiling source file 'Game.cpp')
+  C:\Users\tmsth\Documents\C + +\SnakeGame\SnakeGame\Game.h(40,16):
+  'new' or 'override' are only allowed when a matching base method from a ref class exists
+  
+C:\Users\tmsth\Documents\C + +\SnakeGame\SnakeGame\Game.h(81,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  (compiling source file 'Game.cpp')
+  
+  Game.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+  SnakeGame.vcxproj -> C:\Users\tmsth\Documents\C + +\SnakeGame\x64\Debug\SnakeGame.exe
