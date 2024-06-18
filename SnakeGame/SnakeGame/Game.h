@@ -10,7 +10,7 @@ namespace SnakeGame {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-
+	using namespace System::Collections::Generic;
 	/// <summary>
 	/// Summary for Game
 	/// </summary>
@@ -45,7 +45,8 @@ namespace SnakeGame {
 			g->FillRectangle(fruitBrush, fruitPos.X, fruitPos.Y, blockSize, blockSize);
 		
 			Brush^ snakeBrush = gcnew SolidBrush(Color::Green);
-			g->FillRectangle(snakeBrush, snakePos.X, snakePos.Y, blockSize, blockSize);
+			for each (Point el in snake)
+			g->FillRectangle(snakeBrush, el.X, el.Y, blockSize, blockSize);
 		}
 
 	private:
@@ -53,12 +54,14 @@ namespace SnakeGame {
 		/// Required designer variable.
 		/// </summary>
 		System::ComponentModel::Container ^components;
-		Point snakePos;
+		List<Point>^ snake;
 		Point fruitPos;
 		const int blockSize = 20;
 
 		Timer^ timer;
 		int moveX = 1, moveY = 0;
+
+
 #pragma region Windows Form Designer generated code
 		/// <summary>
 		/// Required method for Designer support - do not modify
@@ -77,7 +80,10 @@ namespace SnakeGame {
 			this->BackColor = Color::Black;
 			this->ResumeLayout(false);
 
-			snakePos = Point(100, 100);
+			snake = gcnew List<Point>();
+			snake->Add(Point(100, 100));
+
+
 			srand(time(NULL));
 			PlaceFruit();
 
@@ -94,15 +100,42 @@ namespace SnakeGame {
 		void PlaceFruit() {
 			int maxX = this->ClientSize.Width / blockSize;
 			int maxY = this->ClientSize.Height / blockSize;
-			fruitPos = Point(rand() % maxX * blockSize, rand() % maxY * blockSize);
+
+			do
+			{
+				fruitPos = Point(rand() % maxX * blockSize, rand() % maxY * blockSize);
+			} while (snake->Contains(fruitPos));
 		}
 
 		void OnTimerTick(Object^ obj, EventArgs^ e) {
-			snakePos.X += moveX * blockSize;
-			snakePos.Y += moveY * blockSize;
+			MoveSnake();
+
+
+			if (snake[0] == fruitPos) {
+				GrowSnake();
+				PlaceFruit();
+			};
 
 			this->Invalidate();
 		}
+
+
+
+		void MoveSnake() {
+			Point newHead = snake[0];
+			newHead.X += moveX * blockSize;
+			newHead.Y += moveY * blockSize;
+			snake->Insert(0, newHead);
+			snake->RemoveAt(snake->Count - 1);
+		};
+
+		void GrowSnake() {
+			Point newHead = snake[0];
+			
+			newHead.X += moveX * blockSize;
+			newHead.Y += moveY * blockSize;
+			snake->Insert(0, newHead);
+		};
 
 		void OnKeyDown(Object^ obj, KeyEventArgs^ e) {
 			switch (e->KeyCode) {
@@ -124,5 +157,10 @@ namespace SnakeGame {
 				break;
 			}
 		}
+
+		void newBody() {
+
+		};
+
 	};
 }
